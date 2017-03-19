@@ -31,7 +31,7 @@ int main()
         cout << endl;
     }
     //Loop for the # where hashspace is number - 1 so that it has
-    // the center of he tree
+    // the center of the tree
      for(int l =3, hashspace = oddnum - 1; l <= oddnum; l+=2){
             // repeat spaces
             for(int s = 1; s <= hashspace; s+=1){
