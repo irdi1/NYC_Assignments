@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int oddnum;
+    int space;
+    int hashspace;
+    //Ask from the user an odd number
+    cout << "Give me an odd number to create the triangle tree: ";
+    cin >> oddnum;
+    cout <<endl;
+    // While loop so that the number is odd
+    while(oddnum % 2 != 1){
+        cout << "You didn't gave me an odd number.";
+        cout << "Give me an odd number: ";
+        cin >> oddnum;
+        cout <<endl;
+    }
+    // Repeat a number of times
+    for (int i=1, space = oddnum-i; i<=oddnum; i+=2, space--){
+        //Repeat spaces
+        for(int k=1; k<=space; k++){
+            cout <<" ";
+        }
+        // Repeat i times
+        for(int k = 1; k<=i; k++){
+            cout <<"*";
+        }
+        cout << endl;
+    }
+    //Loop for the # where hashspace is number - 1 so that it has
+    // the center of he tree
+     for(int l =3, hashspace = oddnum - 1; l <= oddnum; l+=2){
+            // repeat spaces
+            for(int s = 1; s <= hashspace; s+=1){
+            cout << " ";
+            }
+            // cout the #
+            cout << "#"<<endl;
+        }
+    return 0;
+}
