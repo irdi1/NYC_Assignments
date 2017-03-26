@@ -21,7 +21,7 @@ void printBox(int size, char ch, char spaceFill){
 }
 
 void printFullLine(int size, char ch){
-
+   // This prints out the top and the bottom line.
     for(int i = 1; i <= size; i++){
         cout << ch;
     }
@@ -29,12 +29,14 @@ void printFullLine(int size, char ch){
 }
 
 void printMidLine(int size, char ch, char spaceFill){
-
+   // This prints the left row.
     for(int i = 1; i <= size - 2; i++){
         cout << ch;
+        // This is the space in the box and the fill.
         for(int i = 1;  i <= size - 2; i++ ){
             cout << spaceFill;
         }
+        // This prints the right row.
         cout << ch;
         cout << endl;
     }
