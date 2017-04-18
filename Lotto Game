@@ -1,0 +1,164 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+int main()
+{
+    int lotto[6];
+    bool unique;
+    srand(time(0));
+    int counter = 0;
+    int tottalCounters[2][4]= {0};
+    char rerun;
+
+    do
+    {
+// Here we create a loop so that we dont have duplicate numbers
+        for(int i = 0; i < 6; i++)
+        {
+            do
+            {
+                unique = true;  // boolean value so that the do while loop exits only when the value has changed
+
+                lotto[i] = rand()% 48 + 1; // Here we add +1 becasue we want to start from 1 and not 0....
+
+                for(int j=0; j < i; j++)
+                {
+                    if(lotto[i] == lotto[j]) // here it checks for equal values from the left to the right until it j < i
+                    {
+                        unique = false;    // boolean value goes false so that it doesn't exit from  the loop and change the value with another random value.
+                        cout << "Duplicate "<< lotto[i] << endl; // it prints the duplicate of the nuber that we found.
+                        break;
+                    }
+                }
+
+            }
+            while(!unique);
+        }
+        // bubble array that puts the numbers in order
+        for(int i = 4; i >= 0; i--)
+        {
+            for(int j =0; j <=i; j++)
+            {
+                if(lotto[j] > lotto[j+1]) // to change the direction just change the: ( < );
+                {
+                    int temp = lotto[j];    //
+                    lotto[j] = lotto[j+1];  //Here we swap the Values
+                    lotto[j+1] = temp;      //
+                }
+            }
+        }
+
+
+        for(int i =0; i< 6; i++)
+        {
+            cout<< lotto[i]<< " ";
+        }
+        cout<< endl;
+        int userNumbers[6];
+        // Ask user for 6 numbers and respond
+        cout<< "Enter six number to win the Lotto: ";
+
+        for(int i = 0; i <6; i++)
+        {
+
+            cin>> userNumbers[i];
+            do
+            {
+                unique = true;  // boolean value so that the do while loop exits only when the value has changed
+
+                for(int j=0; j < i; j++)
+                {
+                    if(userNumbers[i] == userNumbers[j]) // here it checks for equal values from the left to the right until it j < i
+                    {
+                        unique = false;    // boolean value goes false so that it doesn't exit from  the loop and change the value with another random value.
+                        cout << "You have alreafy given this number"<<endl;
+                        cin >> userNumbers[i]; // it prints the duplicate of the nuber that we found.
+                        break;
+                    }
+                    if(userNumbers[i] < 1 || userNumbers[i] > 49 )
+                    {
+                        unique =false;
+                        cout << "Give a number between 1  and 49: "<<endl;
+                        cin >> userNumbers[i];
+                        break;
+                    }
+                }
+
+            }
+            while(!unique);
+
+            
+            // Calculate how many correct guesses he has.
+            for(int j = 0; j < 6; j++) 
+            {
+                if(userNumbers[i] == lotto[j])
+                {
+                    counter ++;  // Add a counter.
+                }
+            }
+        }
+
+        for(int r = 0; r < 2; r++) // here i created the array to store the tottal counter for 6, 5, 4, 3.
+        {
+            for(int c = 0; c < 4; c++) 
+            {
+                tottalCounters[0][c] = 6 - c; // Here i store in the first column the nmubers 6, 5, 4, 3.
+
+            }
+        }
+
+
+        if(counter == 6)
+        {
+            tottalCounters[1][0] ++; // Here i give the tottal counter how many time he manage to guess 6 numbers right
+            cout << "You found "<< counter <<" correct numbers."<< endl;
+            cout << "You Won the Biggest Prize!!!"<<endl;
+        }
+        else if(counter == 5)
+        {
+            tottalCounters[1][1] ++;
+            cout << "You found "<< counter <<" correct numbers."<< endl;
+            cout << "You Won the second Bigest Prize!!!"<<endl;
+        }
+        else if(counter == 4)
+        {
+            tottalCounters[1][2] ++;
+            cout << "You found "<< counter <<" correct numbers."<< endl;
+            cout << "You won Congratulations.!."<<endl;
+        }
+        else if(counter == 3)
+        {
+            tottalCounters[1][3] ++;
+            cout << "You found "<< counter <<" correct numbers."<< endl;
+            cout << "You Won!!"<<endl;
+        }
+        else
+        {
+            cout << "You found "<< counter <<" correct numbers."<< endl;
+            cout << "Better Luck next time."<< endl;
+            cout <<"GAME OVER"<<endl;
+        }
+        counter = 0; // The counter goes back to ZERO.
+
+        cout << "Would you like to execute this program again? Type in Y or y for yes, or any other letter to quit the program: "; // Asks the user if he wants to play again
+        cin >> rerun;
+
+    }
+    while(rerun == 'y' || rerun == 'Y'); // the condition that is required to play again.
+    
+    // Display how many times
+    // User won 6, 5, 4 or 3
+    for(int r = 0; r < 2; r++) 
+    {
+        for(int c = 0; c < 4; c++)
+        {
+            cout << tottalCounters[r][c]<< " ";
+        }
+        cout<< endl;
+    }
+    
+    return 0;
+}
